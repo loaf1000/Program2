@@ -47,6 +47,7 @@ namespace Program2 {
 	private: System::Windows::Forms::SaveFileDialog^  saveFileDialogFilePath;
 
 
+
 	private:
 		/// <summary>
 		/// Required designer variable.
@@ -79,7 +80,7 @@ namespace Program2 {
 			this->buttonSubmit->Font = (gcnew System::Drawing::Font(L"Times New Roman", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->buttonSubmit->ForeColor = System::Drawing::Color::White;
-			this->buttonSubmit->Location = System::Drawing::Point(129, 387);
+			this->buttonSubmit->Location = System::Drawing::Point(152, 387);
 			this->buttonSubmit->Name = L"buttonSubmit";
 			this->buttonSubmit->Size = System::Drawing::Size(92, 44);
 			this->buttonSubmit->TabIndex = 0;
@@ -102,10 +103,13 @@ namespace Program2 {
 			// 
 			// richTextBoxIO
 			// 
+			this->richTextBoxIO->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->richTextBoxIO->Location = System::Drawing::Point(354, 174);
-			this->richTextBoxIO->MaximumSize = System::Drawing::Size(300, 400);
+			this->richTextBoxIO->MaximumSize = System::Drawing::Size(350, 400);
+			this->richTextBoxIO->MinimumSize = System::Drawing::Size(350, 400);
 			this->richTextBoxIO->Name = L"richTextBoxIO";
-			this->richTextBoxIO->Size = System::Drawing::Size(300, 400);
+			this->richTextBoxIO->Size = System::Drawing::Size(350, 400);
 			this->richTextBoxIO->TabIndex = 2;
 			this->richTextBoxIO->Text = L"";
 			// 
@@ -115,7 +119,7 @@ namespace Program2 {
 			this->pictureBox1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->pictureBox1->Location = System::Drawing::Point(0, 0);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(1008, 748);
+			this->pictureBox1->Size = System::Drawing::Size(1008, 742);
 			this->pictureBox1->TabIndex = 3;
 			this->pictureBox1->TabStop = false;
 			// 
@@ -126,11 +130,11 @@ namespace Program2 {
 			this->labelTitle->Font = (gcnew System::Drawing::Font(L"Times New Roman", 21.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->labelTitle->ForeColor = System::Drawing::Color::White;
-			this->labelTitle->Location = System::Drawing::Point(462, 9);
+			this->labelTitle->Location = System::Drawing::Point(305, 9);
 			this->labelTitle->Name = L"labelTitle";
-			this->labelTitle->Size = System::Drawing::Size(84, 33);
+			this->labelTitle->Size = System::Drawing::Size(399, 33);
 			this->labelTitle->TabIndex = 4;
-			this->labelTitle->Text = L"label1";
+			this->labelTitle->Text = L"Welcome to Laithe\'s Text File I/O";
 			this->labelTitle->TextAlign = System::Drawing::ContentAlignment::TopCenter;
 			// 
 			// labelDescription
@@ -140,11 +144,11 @@ namespace Program2 {
 			this->labelDescription->Font = (gcnew System::Drawing::Font(L"Times New Roman", 21.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->labelDescription->ForeColor = System::Drawing::Color::White;
-			this->labelDescription->Location = System::Drawing::Point(462, 124);
+			this->labelDescription->Location = System::Drawing::Point(12, 110);
 			this->labelDescription->Name = L"labelDescription";
-			this->labelDescription->Size = System::Drawing::Size(84, 33);
+			this->labelDescription->Size = System::Drawing::Size(372, 33);
 			this->labelDescription->TabIndex = 5;
-			this->labelDescription->Text = L"label2";
+			this->labelDescription->Text = L"No Text file Opened or Created";
 			this->labelDescription->TextAlign = System::Drawing::ContentAlignment::TopCenter;
 			// 
 			// textBoxUserInput
@@ -153,23 +157,20 @@ namespace Program2 {
 			this->textBoxUserInput->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->textBoxUserInput->ForeColor = System::Drawing::Color::White;
-			this->textBoxUserInput->Location = System::Drawing::Point(55, 282);
+			this->textBoxUserInput->Location = System::Drawing::Point(84, 282);
 			this->textBoxUserInput->Name = L"textBoxUserInput";
 			this->textBoxUserInput->Size = System::Drawing::Size(229, 26);
 			this->textBoxUserInput->TabIndex = 6;
+			this->textBoxUserInput->Text = L"Please enter a command here.";
 			// 
 			// openFileDialogFilePath
 			// 
-			this->openFileDialogFilePath->FileName = L"";
 			this->openFileDialogFilePath->Filter = L"Text Files (.txt)| *.txt*";
-			this->openFileDialogFilePath->InitialDirectory = Directory::GetCurrentDirectory();
-			this->openFileDialogFilePath->AddExtension = true;
-			//
+			// 
 			// saveFileDialogFilePath
+			// 
+			this->saveFileDialogFilePath->CreatePrompt = true;
 			this->saveFileDialogFilePath->Filter = L"Text Files (.txt)| *.txt*";
-			this->saveFileDialogFilePath->InitialDirectory = Directory::GetCurrentDirectory();
-			this->saveFileDialogFilePath->OverwritePrompt = true;
-			this->saveFileDialogFilePath->AddExtension = true;
 			// 
 			// MyForm
 			// 
@@ -177,7 +178,7 @@ namespace Program2 {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->ClientSize = System::Drawing::Size(1008, 748);
+			this->ClientSize = System::Drawing::Size(1008, 742);
 			this->Controls->Add(this->textBoxUserInput);
 			this->Controls->Add(this->labelDescription);
 			this->Controls->Add(this->labelTitle);
@@ -194,6 +195,9 @@ namespace Program2 {
 
 		}
 
+
+#pragma endregion
+
 		////////////////////////////////////////////////////////////////////
 		//
 		//				DECLARE GLOBAL VARIABLES/OBJECTS
@@ -202,50 +206,163 @@ namespace Program2 {
 
 		StreamReader^ sr;
 		StreamWriter^ sw;
-		String^ userInput;
-		String^ filePath;
-		//enum command { create, write, read, open };
 
+		
+		String^ filePath;
+		String^ fileName;
+
+		enum class Command { intial = -1, create, write, read, open, append, help };
+		
+		bool writeMode = false;
 
 		////////////////////////////////////////////////////////////////////
-#pragma endregion
 	private: System::Void buttonSubmit_Click(System::Object^  sender, System::EventArgs^  e) 
 	{
-		//command commandLetter;
+		String^ readString;
+		Command commandLetter = Command::intial;
+		String^ userInput;
 
 		userInput = textBoxUserInput->Text;
-		if (userInput->Length == 1)
+
+		if (writeMode)
 		{
 
+			sw = File::AppendText(filePath);
+	
+			if (userInput->ToLower() == "/end") // /end is the sentinal
+			{
+				writeMode = false;
+				richTextBoxIO->Clear();
+				richTextBoxIO->Text = "Writing to disk complete...";
+			}
+			else
+			{
+				sw->WriteLine(userInput);
+				richTextBoxIO->Text += userInput + "\n";
+			}
+
+			sw->Close();
 		}
 
-		/*switch (commandLetter)
+		else
 		{
-		case create:
-			break;
-		case open:
-			break;
-		case read:
-			break;
-		case write:
-			break;
-		default:
-			break;
-		}*/
-		if (userInput->ToLower() == "c")
-		{
-			saveFileDialogFilePath->ShowDialog();
-			filePath = saveFileDialogFilePath->FileName;
-			saveFileDialogFilePath->OpenFile();
-			labelDescription->Text = filePath + " has been created.";
+			if (userInput->Length == 1)
+			{
+				if (userInput->ToLower() == "c")
+				{
+					commandLetter = Command::create;
+				}
 
+				if (userInput->ToLower() == "o")
+				{
+					commandLetter = Command::open;
+				}
+
+				if (userInput->ToLower() == "r")
+				{
+					commandLetter = Command::read;
+				}
+
+				if (userInput->ToLower() == "w")
+				{
+					commandLetter = Command::write;
+				}
+				if (userInput == "?")
+				{
+					commandLetter = Command::help;
+				}
+			}
+
+			switch (commandLetter)
+			{
+			case Command::create:
+
+				saveFileDialogFilePath->ShowDialog();
+				filePath = saveFileDialogFilePath->FileName;
+				if (filePath->IndexOf(".txt") > -1) // IndexOf will return a -1 if .txt is not in the string
+				{
+					sw = gcnew StreamWriter(filePath);
+				}
+				else
+				{
+					sw = gcnew StreamWriter(filePath + ".txt");
+				}
+
+				sw->Close();
+				labelDescription->Text = Path::GetFileName(filePath) + " has been created.";
+
+				break;
+			case Command::open:
+
+				openFileDialogFilePath->ShowDialog();
+				filePath = openFileDialogFilePath->FileName;
+				labelDescription->Text = Path::GetFileName(filePath) + " has been opened.";
+
+				break;
+			case Command::read:
+
+				if (filePath == nullptr)
+				{
+					richTextBoxIO->Clear();
+					richTextBoxIO->Text = "Please open or create a file before reading.";
+				}
+
+				else
+				{
+					sr = gcnew StreamReader(filePath);
+					richTextBoxIO->Clear();
+
+					while ((readString = sr->ReadLine()) != nullptr)
+					{
+						richTextBoxIO->Text += readString + "\n";
+					}
+
+					sr->Close();
+				}
+
+				break;
+			case Command::write:
+
+				if (filePath == nullptr)
+				{
+					richTextBoxIO->Clear();
+					richTextBoxIO->Text = "Please open or create a file before writing.";
+				}
+
+				else
+				{
+					writeMode = true;
+					richTextBoxIO->Clear();
+					richTextBoxIO->Text = "Write Mode activated!\n"
+						+ "Please enter a line of text to write.\n"
+						+ "To end writing to disk enter the sentinal \"/end\" without quotes.";
+					textBoxUserInput->Text = "Enter text here";
+				}
+
+				break;
+			case Command::help:
+
+				richTextBoxIO->Clear();
+				richTextBoxIO->Text = "List of commands: \n"
+									+ "C : Creates a new text file\n"
+									+ "O : Opens an existing text file\n"
+									+ "R : Reads a text file that has been opened\n"
+									+ "W : Writes to a text file that has been opened\n"
+									+ "? : Brings up this list of commands\n";
+				richTextBoxIO->Text +="Other useful information:\n"
+									+ "Write will automatically append the current textfile. If you want to overwrite a textfile "
+									+ "use the C command to create a new text file and use the same name. It will overwrite the file "
+									+ " and create a blank text file."; 
+
+				break;
+			default:
+
+				richTextBoxIO->Clear();
+				richTextBoxIO->Text = userInput + " is not a valid command in command mode. \nPlease enter ? for help." ;
+				break;
+			}
 		}
-		if (userInput->ToLower() == "o")
-		{
-			openFileDialogFilePath->ShowDialog();
-			filePath = openFileDialogFilePath->FileName;
-			labelDescription->Text = filePath + " has been opened.";
-		}
+
 
 	}
 };
