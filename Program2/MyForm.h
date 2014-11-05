@@ -12,10 +12,10 @@ Assignment Name		    :File IO IO
 Course # and Title		:CISC 192 - C++
 Class Meeting Time		:MW 9:35 - 12:45
 Instructor			    :Professor Forman
-Hours			        :#
-Difficulty			    :#
-Completion Date		    :Month/DD/YYYY
-Project Name		    :Project Name
+Hours			        :15
+Difficulty			    :3
+Completion Date		    :November/04/2014
+Project Name		    :Program2
 
 ***************************************************************
 ***************************************************************
@@ -28,6 +28,7 @@ displayHelp
 farewell
 openTextFile
 readTextFile
+sortAlpha
 stringComparison
 writeTextFile
 
@@ -41,7 +42,13 @@ buttonQuit_Click
 ***************************************************************
 ***************************************************************
 PROGRAM DESCRIPTION
-
+This program displays a brief welcome message
+allows a user to read and write to text files that
+they create or open. The program also allows a user to alphabetically
+sort a text file and read the sorted file. When the user quits the 
+program displays in a message box a farewell message,
+followed by ID information, credits, media, and stars in their own
+message box.
 
 
 ***************************************************************
@@ -305,8 +312,9 @@ namespace Program2 {
 		String^ filePath;
 		String^ fileName;
 
-		enum class Command { initial = -1, create, write, read, open, help };
+		enum class Command { initial = -1, create, write, read, open, help, sort };
 
+		bool songPlaying = false;
 		bool writeMode = false;
 
 		////////////////////////////////////////////////////////////////////
@@ -388,6 +396,11 @@ namespace Program2 {
 				return Command::read;
 			}
 
+			else if (userInput->ToLower() == "s")
+			{
+				return Command::sort;
+			}
+
 			else if (userInput->ToLower() == "w")
 			{
 				return Command::write;
@@ -435,7 +448,10 @@ namespace Program2 {
 			}
 
 			sw->Close();
-			labelDescription->Text = Path::GetFileName(filePath) + " has been created.";
+			if (filePath != nullptr)
+			{
+				labelDescription->Text = Path::GetFileName(filePath) + " has been created.";
+			}
 		}
 
 
@@ -464,6 +480,7 @@ namespace Program2 {
 				+ "C : Creates a new text file\n"
 				+ "O : Opens an existing text file\n"
 				+ "R : Reads a text file that has been opened\n"
+				+ "S : Sorts a text file alphabetically and displays the alphabetized version\n"
 				+ "W : Writes to a text file that has been opened\n"
 				+ "? : Brings up this list of commands\n\n";
 			richTextBoxIO->Text += "Other useful information:\n"
@@ -570,7 +587,11 @@ namespace Program2 {
 		{
 			openFileDialogFilePath->ShowDialog();
 			filePath = openFileDialogFilePath->FileName;
-			labelDescription->Text = Path::GetFileName(filePath) + " has been opened.";
+			if (filePath != nullptr)
+			{
+				labelDescription->Text = Path::GetFileName(filePath) + " has been opened.";
+			}
+
 		}
 
 		/**************************************************************
@@ -622,6 +643,71 @@ namespace Program2 {
 			}
 		}
 
+		/**************************************************************
+
+			NAME: sortAlpha
+
+			DESCRIPTION: reads a text file and displays the lines in 
+			alphabetical order. If numbers are included it will sort them
+			based on the numerical character codes and not the value of the
+			number shown.
+
+			PRECONDITIONS: A valid textfile path has been choosen
+
+			POSTCONDITIONS: None
+
+			CALLED BY: buttonSubmit_Click
+
+			CALLS: None
+
+			**************************************************************/
+
+		void sortAlpha()
+		{
+			////////////////////////////////////////////////////////////////////
+			//
+			//				DECLARE LOCAL VARIABLES/OBJECTS
+			//
+			////////////////////////////////////////////////////////////////////
+
+			ArrayList stringArray; // Dynamically creates a list objects similiar to an array but can dynamically change in size
+			String^ tempString = "you should not see this";
+
+			////////////////////////////////////////////////////////////////////
+			int index = 0;
+			if (filePath == nullptr)
+			{
+				richTextBoxIO->Clear();
+				richTextBoxIO->Text = "Please open or create a file before sorting alphabetically.";
+			}
+			else
+			{
+				sr = gcnew StreamReader(filePath);
+				richTextBoxIO->Clear();
+				labelDescription->Text = "Sorting " + Path::GetFileName(filePath) + ".";
+
+				while ((tempString =sr->ReadLine()) != nullptr)
+				{
+					stringArray.Add(tempString);
+					index++;
+				}
+				if (stringArray.Count != 0)
+				{
+					stringArray.Sort();
+					for each (String^ str in stringArray)
+					{
+						richTextBoxIO->Text += str + "\n";
+					}
+				}
+				else
+				{
+					richTextBoxIO->Text = "There is nothing in this file!";
+				}
+			}
+
+			sr->Close();
+
+		}
 
 		/**************************************************************
 
@@ -643,9 +729,17 @@ namespace Program2 {
 
 		bool stringComparison(String^ dynamicString)
 		{
+			////////////////////////////////////////////////////////////////////
+			//
+			//				DECLARE LOCAL VARIABLES/OBJECTS
+			//
+			////////////////////////////////////////////////////////////////////
+
 			String^ staticString = "Write Mode activated!\n"
 				+ "Please enter a line of text to write.\n"
 				+ "To end writing to disk enter the sentinal \"/end\" without quotes.";
+
+			////////////////////////////////////////////////////////////////////
 
 			return dynamicString->Equals(staticString);
 		}
@@ -723,10 +817,26 @@ namespace Program2 {
 	private: System::Void buttonSubmit_Click(System::Object^  sender, System::EventArgs^  e)
 	{
 
+		////////////////////////////////////////////////////////////////////
+		//
+		//				DECLARE LOCAL VARIABLES/OBJECTS
+		//
+		////////////////////////////////////////////////////////////////////
+
+		System::Media::SoundPlayer sndPlayer("..//Media/Music/Senju Akira - Crime and Punishment.wav");
+
 		Command commandLetter = Command::initial;
 		String^ userInput;
 
+		////////////////////////////////////////////////////////////////////
+
 		userInput = textBoxUserInput->Text;
+
+		if (!songPlaying)
+		{
+			sndPlayer.PlayLooping();
+			songPlaying = true;
+		}
 
 		if (writeMode)
 		{
@@ -755,6 +865,11 @@ namespace Program2 {
 			case Command::read:
 
 				readTextFile();
+
+				break;
+			case Command::sort:
+				
+				sortAlpha();
 
 				break;
 			case Command::write:
@@ -796,7 +911,6 @@ namespace Program2 {
 	{
 		farewell();
 	}
-
 			 ////////////////////////////////////////////////////////////////////
 			 //
 			 //				END EVENT DRIVEN FUNCTIONS

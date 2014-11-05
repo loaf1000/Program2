@@ -4,6 +4,7 @@
 4.Prompt user for name of textfile
 5.Asks user if they want to overwrite the textfile if it already exists (2 Stars)
 6.Advanced featurs Open file dialog box
+7.Sort a text file alphabetically and display it (3 Stars)
 
 
-Total Stars: 7
+Total Stars: 10

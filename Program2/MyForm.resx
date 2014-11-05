@@ -122,6 +122,7 @@
 C : Creates a new text file
 O : Opens an existing text file
 R : Reads a text file that has been opened
+S : Sorts a text file alphabetically and displays the alphabetized version
 W : Writes to a text file that has been opened
 ? : Brings up this list of commands
 
