@@ -1,3 +1,5 @@
-test
-test2
-its working
+This is a test
+Checking write mode 
+Checking the write mode again!
+this is also a test
+it is working as intended

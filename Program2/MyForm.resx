@@ -117,6 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="richTextBoxIO.Text" xml:space="preserve">
+    <value>List of commands: 
+C : Creates a new text file
+O : Opens an existing text file
+R : Reads a text file that has been opened
+W : Writes to a text file that has been opened
+? : Brings up this list of commands
+
+Other useful information:
+Write will automatically append the current textfile. If you want to overwrite a textfile use the C command to create a new text file and use the same name. It will overwrite the file and create a blank text file with the same name.
+
+When you open or create a file the previous file is closed.
+</value>
+  </data>
   <metadata name="openFileDialogFilePath.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
